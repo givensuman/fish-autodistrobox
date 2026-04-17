@@ -1,3 +1,5 @@
+alias distrobox-init _fish_autodistrobox_distrobox-init
+
 function _extract_box_name_from_ini
     grep -m 1 '^\[.+\]' $argv[1] | tr -d '[]'
 end
@@ -47,6 +49,7 @@ end
 function _fish_autodistrobox_uninstall --on-event fish-autodistrobox_uninstall
     functions --erase _extract_box_name_from_ini
     functions --erase _fish_autodistrobox_auto
+    functions --erase distrobox-init
     set --erase distrobox_disable_auto_assemble
     set --erase distrobox_disable_auto_enter
     set --erase distrobox_init_template
