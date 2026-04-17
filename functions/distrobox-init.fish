@@ -6,11 +6,14 @@ function distrobox-init --description "Initialize a distrobox.ini file in the cu
         return 1
     end
 
-    if command -q $distrobox_init_template
-        cat $distrobox_init_template >distrobox.ini
+    set -l box_name (pwd | string trim -l -c / | string replace -a / -)
+
+    if set -q $distrobox_init_template
+        echo "[$box_name]" >distrobox.ini
+        echo $distrobox_init_template >>distrobox.ini
     else
         echo "\
-        [ubuntu]
+        [$box_name]
         image=ghcr.io/ublue-os/ubuntu-toolbox:latest
         init=false
         nvidia=false
